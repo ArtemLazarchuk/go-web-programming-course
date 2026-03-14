@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор електроенергетичної системи</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 20px auto; padding: 0 20px; }
+        h1 { font-size: 1.5em; }
+        h2 { font-size: 1.2em; margin-top: 1.5em; }
+        form { margin: 1em 0; }
+        label { display: block; margin-top: 8px; }
+        input { width: 100%; padding: 6px; box-sizing: border-box; }
+        button { margin-top: 12px; padding: 8px 20px; cursor: pointer; width: 100%; }
+        .result { white-space: pre-wrap; background: #f5f5f5; padding: 12px; margin-top: 12px; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+        hr { margin: 1.5em 0; border: none; border-top: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Калькулятор електроенергетичної системи</h1>
+
+    <h2>Завдання 1</h2>
+    <form method="POST">
+        <input type="hidden" name="task" value="1">
+        <label>Sm (МВА) <input type="number" step="any" name="sm" value="{{index .Task1Values "sm"}}"></label>
+        <label>U_nom (кВ) <input type="number" step="any" name="unom" value="{{index .Task1Values "unom"}}"></label>
+        <button type="submit">Обрахувати завдання 1</button>
+    </form>
+    {{if .Task1Result}}
+    <div class="result">{{.Task1Result}}</div>
+    {{end}}
+
+    <hr>
+
+    <h2>Завдання 2</h2>
+    <form method="POST">
+        <input type="hidden" name="task" value="2">
+        <label>Ucn (кВ) <input type="number" step="any" name="ucn" value="{{index .Task2Values "ucn"}}"></label>
+        <label>Sk (МВА) <input type="number" step="any" name="sk" value="{{index .Task2Values "sk"}}"></label>
+        <label>Uk (%) <input type="number" step="any" name="uk" value="{{index .Task2Values "uk"}}"></label>
+        <label>Snom_t (МВА) <input type="number" step="any" name="snomT" value="{{index .Task2Values "snomT"}}"></label>
+        <button type="submit">Обрахувати завдання 2</button>
+    </form>
+    {{if .Task2Result}}
+    <div class="result">{{.Task2Result}}</div>
+    {{end}}
+
+    <hr>
+
+    <h2>Завдання 3</h2>
+    <form method="POST">
+        <input type="hidden" name="task" value="3">
+        <label>Uk_max (%) <input type="number" step="any" name="ukMax" value="{{index .Task3Values "ukMax"}}"></label>
+        <label>Uv_n (кВ) <input type="number" step="any" name="uvN" value="{{index .Task3Values "uvN"}}"></label>
+        <label>Snom_t (МВА) <input type="number" step="any" name="snomT3" value="{{index .Task3Values "snomT3"}}"></label>
+        <label>Un_n (кВ) <input type="number" step="any" name="unN" value="{{index .Task3Values "unN"}}"></label>
+        <label>Rc_min (Ом) <input type="number" step="any" name="rcMin" value="{{index .Task3Values "rcMin"}}"></label>
+        <button type="submit">Обрахувати завдання 3</button>
+    </form>
+    {{if .Task3Result}}
+    <div class="result">{{.Task3Result}}</div>
+    {{end}}
+</body>
+</html>
