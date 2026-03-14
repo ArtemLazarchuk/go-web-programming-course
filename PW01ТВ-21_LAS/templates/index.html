@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор палива</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 20px auto; padding: 0 20px; }
+        h1 { font-size: 1.5em; }
+        h2 { font-size: 1.2em; margin-top: 2em; }
+        form { margin: 1em 0; }
+        label { display: block; margin-top: 8px; }
+        input { width: 100%; padding: 6px; box-sizing: border-box; }
+        button { margin-top: 12px; padding: 8px 20px; cursor: pointer; }
+        .result { white-space: pre-wrap; background: #f5f5f5; padding: 12px; margin-top: 12px; border-radius: 4px; font-family: monospace; }
+        hr { margin: 2em 0; border: none; border-top: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Калькулятор палива</h1>
+
+    <h2>Завдання 1</h2>
+    <form method="POST">
+        <input type="hidden" name="task" value="1">
+        <label>Hᵖ (%) <input type="number" step="any" name="hp" value="{{index .Task1Values "hp"}}"></label>
+        <label>C (%) <input type="number" step="any" name="c" value="{{index .Task1Values "c"}}"></label>
+        <label>Sᵖ (%) <input type="number" step="any" name="sp" value="{{index .Task1Values "sp"}}"></label>
+        <label>Nᵖ (%) <input type="number" step="any" name="np" value="{{index .Task1Values "np"}}"></label>
+        <label>Oᵖ (%) <input type="number" step="any" name="op" value="{{index .Task1Values "op"}}"></label>
+        <label>Aᵖ (%) <input type="number" step="any" name="ap" value="{{index .Task1Values "ap"}}"></label>
+        <label>W (%) <input type="number" step="any" name="w" value="{{index .Task1Values "w"}}"></label>
+        <button type="submit">Обрахувати</button>
+    </form>
+    {{if .Task1Result}}
+    <div class="result">{{.Task1Result}}</div>
+    {{end}}
+
+    <hr>
+
+    <h2>Завдання 2</h2>
+    <form method="POST">
+        <input type="hidden" name="task" value="2">
+        <label>Hг (%) <input type="number" step="any" name="hg" value="{{index .Task2Values "hg"}}"></label>
+        <label>Cг (%) <input type="number" step="any" name="cg" value="{{index .Task2Values "cg"}}"></label>
+        <label>Sг (%) <input type="number" step="any" name="sg" value="{{index .Task2Values "sg"}}"></label>
+        <label>Oг (%) <input type="number" step="any" name="og" value="{{index .Task2Values "og"}}"></label>
+        <label>Vг (мг/кг) <input type="number" step="any" name="vg" value="{{index .Task2Values "vg"}}"></label>
+        <label>Wг (%) <input type="number" step="any" name="wg" value="{{index .Task2Values "wg"}}"></label>
+        <label>Aг (%) <input type="number" step="any" name="ag" value="{{index .Task2Values "ag"}}"></label>
+        <label>Q (МДж/кг) <input type="number" step="any" name="Qdaf" value="{{index .Task2Values "Qdaf"}}"></label>
+        <button type="submit">Обрахувати</button>
+    </form>
+    {{if .Task2Result}}
+    <div class="result">{{.Task2Result}}</div>
+    {{end}}
+</body>
+</html>
