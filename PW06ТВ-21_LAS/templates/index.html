@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розрахунок електричних навантажень</title>
+    <style>
+        body { font-family: sans-serif; max-width: 700px; margin: 20px auto; padding: 0 20px; }
+        h1 { font-size: 1.5em; }
+        h2 { font-size: 1em; color: #666; margin-top: 0; }
+        .ep-card { background: #f0f0f0; padding: 12px; margin: 8px 0; border-radius: 4px; }
+        .ep-title { font-weight: bold; margin-bottom: 4px; }
+        .ep-meta { font-size: 0.85em; color: #666; margin-bottom: 8px; }
+        .ep-inputs { display: flex; gap: 8px; flex-wrap: wrap; }
+        .ep-inputs label { flex: 1; min-width: 120px; }
+        input { width: 100%; padding: 6px; box-sizing: border-box; }
+        .buttons { display: flex; gap: 8px; margin: 16px 0; }
+        button { padding: 8px 20px; cursor: pointer; flex: 1; }
+        .result { white-space: pre-wrap; background: #e3f2fd; padding: 12px; margin-top: 12px; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+        .error { background: #ffebee; color: #c62828; padding: 12px; border-radius: 4px; margin-top: 12px; }
+    </style>
+</head>
+<body>
+    <h1>Розрахунок електричних навантажень</h1>
+    <h2>Лабораторна робота 6</h2>
+
+    <form method="POST">
+        <p><strong>Вхідні дані</strong></p>
+
+        {{range $i, $ep := .EPList}}
+        <div class="ep-card">
+            <div class="ep-title">{{add $i 1}}. {{$ep.Type.Name}}</div>
+            <div class="ep-meta">n={{$ep.Type.N}}, η={{$ep.Type.Eta}}, cosφ={{$ep.Type.CosPhi}}, U={{$ep.Type.U}} кВ</div>
+            <div class="ep-inputs">
+                <label>Рн (кВт) <input type="number" step="any" name="pn_{{$i}}" value="{{$ep.Pn}}" placeholder="Рн"></label>
+                <label>Кв <input type="number" step="any" name="kv_{{$i}}" value="{{$ep.Kv}}" placeholder="Кв" min="0" max="1"></label>
+                <label>tgφ <input type="number" step="any" name="tgPhi_{{$i}}" value="{{$ep.TgPhi}}" placeholder="tgφ"></label>
+            </div>
+        </div>
+        {{end}}
+
+        <div class="buttons">
+            <button type="submit" name="action" value="example">Приклад</button>
+            <button type="submit" name="action" value="calculate">Обчислити</button>
+        </div>
+    </form>
+
+    {{if .Error}}
+    <div class="error">Помилка: перевірте {{.Error}}</div>
+    {{end}}
+
+    {{if .Result}}
+    <div class="result">{{.Result}}</div>
+    {{end}}
+</body>
+</html>
