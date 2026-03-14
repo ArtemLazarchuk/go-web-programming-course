@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор емісій</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 20px auto; padding: 0 20px; }
+        h1 { font-size: 1.5em; }
+        h2 { font-size: 1.2em; margin-top: 1.5em; }
+        form { margin: 1em 0; }
+        label { display: block; margin-top: 8px; }
+        input { width: 100%; padding: 6px; box-sizing: border-box; }
+        button { margin-top: 12px; padding: 8px 20px; cursor: pointer; width: 100%; }
+        .result { white-space: pre-wrap; background: #f5f5f5; padding: 12px; margin-top: 12px; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>Калькулятор емісій</h1>
+    <p>Введіть дані для кожного виду палива:</p>
+
+    <form method="POST">
+        <h2>Вугілля</h2>
+        <label>Обс'яг палива (т) <input type="number" step="any" name="bCoal" value="{{index .Values "bCoal"}}"></label>
+        <label>Нижча теплота згорання (МДж/кг) <input type="number" step="any" name="qCoal" value="{{index .Values "qCoal"}}"></label>
+        <label>Масовий вміст золи в паливі (%) <input type="number" step="any" name="kCoal" value="{{index .Values "kCoal"}}"></label>
+
+        <h2>Мазут</h2>
+        <label>Обс'яг палива (т) <input type="number" step="any" name="bOil" value="{{index .Values "bOil"}}"></label>
+        <label>Нижча теплота згорання (МДж/кг) <input type="number" step="any" name="qOil" value="{{index .Values "qOil"}}"></label>
+        <label>Масовий вміст золи в паливі (%) <input type="number" step="any" name="kOil" value="{{index .Values "kOil"}}"></label>
+
+        <h2>Природний газ</h2>
+        <label>Обс'яг палива (тис м³) <input type="number" step="any" name="bGas" value="{{index .Values "bGas"}}"></label>
+        <label>Об'ємна нижча теплота зг. (МДж/м³) <input type="number" step="any" name="qGas" value="{{index .Values "qGas"}}"></label>
+        <label>Густина (кг/м³) <input type="number" step="any" name="kGas" value="{{index .Values "kGas"}}"></label>
+
+        <button type="submit">Обрахувати</button>
+    </form>
+
+    {{if .Result}}
+    <div class="result">{{.Result}}</div>
+    {{end}}
+</body>
+</html>
