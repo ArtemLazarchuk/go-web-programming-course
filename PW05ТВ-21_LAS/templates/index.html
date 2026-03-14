@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор надійності</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 20px auto; padding: 0 20px; }
+        h1 { font-size: 1.5em; }
+        h2 { font-size: 1em; color: #666; margin-top: 0; }
+        form { margin: 1em 0; }
+        label { display: block; margin-top: 8px; }
+        input { width: 100%; padding: 6px; box-sizing: border-box; }
+        .buttons { display: flex; gap: 8px; margin-top: 12px; }
+        button { padding: 8px 20px; cursor: pointer; flex: 1; }
+        .result { white-space: pre-wrap; background: #f5f5f5; padding: 12px; margin-top: 12px; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+        .error { background: #ffebee; color: #c62828; padding: 12px; border-radius: 4px; margin-top: 12px; }
+        .hint { font-size: 0.85em; color: #666; margin-top: 2px; }
+    </style>
+</head>
+<body>
+    <h1>Калькулятор надійності систем електропередачі</h1>
+    <h2>Лабораторна робота 5</h2>
+
+    <form method="POST">
+        <p><strong>Вхідні параметри</strong></p>
+        <label>Кількість приєднань 10 кВ <input type="number" min="1" name="connections" value="{{index .Values "connections"}}"></label>
+        <span class="hint">Приклад: 6</span>
+
+        <label>Збитки від аварійних перерв (грн/кВт·год) <input type="number" step="any" name="accidentPrice" value="{{index .Values "accidentPrice"}}"></label>
+        <span class="hint">Приклад: 23.6</span>
+
+        <label>Збитки від планових перерв (грн/кВт·год) <input type="number" step="any" name="planedPrice" value="{{index .Values "planedPrice"}}"></label>
+        <span class="hint">Приклад: 17.6</span>
+
+        <div class="buttons">
+            <button type="submit" name="action" value="example">Приклад</button>
+            <button type="submit" name="action" value="calculate">Обчислити</button>
+        </div>
+    </form>
+
+    {{if .Error}}
+    <div class="error">{{.Error}}</div>
+    {{end}}
+
+    {{if .Result}}
+    <div class="result">{{.Result}}</div>
+    {{end}}
+</body>
+</html>
